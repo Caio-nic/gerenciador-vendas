@@ -29,77 +29,48 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 700px;
 }
 .menu {
   justify-content: space-between;
+  text-decoration: none;
 }
+/* .menuSubtitle {
+} */
 .cardTitle {
   text-align: center;
 }
 .textCard {
   color: rgb(105, 101, 101);
 }
-#button {
-  background-color: #37b461;
-  color: white;
-  width: 300px;
-  height: 50px;
-  border-radius: 150px;
-  border: 0px;
-  font-size: medium;
-}
-#ContactAddForm {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  align-items: center;
-}
-.inputsForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-.firstInputs {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
+
 .field-wrapper {
   display: flex;
   flex-direction: column;
 }
 /* #nameTitle {
   } */
-#name,
-#email,
-#message {
-  font-size: 20px;
-  border-radius: 10px;
-  background-color: #fefafa;
-  border-color: rgb(76, 168, 138);
-}
-
-#inputTitle {
-  font-size: 25px;
-}
-#message {
-  width: 530px;
-}
-.confirmation {
-  color: green;
-}
 table {
   width: 100%;
   border-collapse: collapse;
 }
-th,
-td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: left;
-}
 th {
   background-color: #f2f2f2;
+}
+th,
+td {
+  /* border: 1px solid black; */
+  padding: 35px;
+  text-align: left;
+}
+
+#button {
+  background-color: #2a59a0;
+  color: white;
+  padding: 20px;
+  border-radius: 150px;
+  border: 0px;
+  font-size: medium;
+  text-decoration: none;
 }

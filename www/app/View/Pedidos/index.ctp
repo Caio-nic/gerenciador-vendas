@@ -21,8 +21,7 @@
           <div class="menu">
               <?php
               echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'));
-              echo $this->Html->link('Detalhes', array('controller' => 'detalhes', 'action' => '/'));
-              echo $this->Html->link('Create', array('controller' => 'creates', 'action' => '/'));
+              echo $this->Html->link('Create', array('controller' => 'creates', 'action' => '/'), array('id' => 'menuSubtitle'));
               ?>
           </div>
         </div>
@@ -35,18 +34,23 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($results as $result) : ?>
-                    <tr>
-                        <td>
-                            <?php echo $result['pedidos']['id']; ?>
-                        </td>
-                        <td>
-                            <?php echo $result['clientes']['nome']; ?>
-                        </td> 
-                        <td>
-                            <?php echo $result['pedidos']['created']; ?>
-                        </td>
-                    </tr>
+                <?php foreach ($pedidos as $pedido) : ?>
+                        <tr>
+                            <td>
+                                <?php echo $pedido['pedidos']['id']; ?>
+                            </td>
+                            <td>
+                                <?php echo $pedido['clientes']['nome']; ?>
+                            </td> 
+                            <td>
+                                <?php echo $pedido['pedidos']['created']; ?>
+                            </td>
+                            <td>
+                                <?php
+                                echo $this->Html->link('Detalhes', array('controller' => 'pedidos', 'action' => '/view' ), array('id' => 'button'));
+                                ?>
+                            </td>
+                        </tr>
                 <?php endforeach; ?>    
             </tbody>
         </table>

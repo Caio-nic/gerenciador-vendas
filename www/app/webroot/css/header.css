@@ -30,7 +30,3 @@ body {
   gap: 20px;
   margin-right: 60px;
 }
-.menu :hover {
-  text-decoration: overline;
-  text-decoration-color: #37b461;
-}
