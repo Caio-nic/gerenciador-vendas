@@ -16,14 +16,14 @@
     <div class="card">
         <div class="headerCard">
             <?php
-		    echo $this->Html->tag('h1','Lista de Pedidos');
+		    echo $this->Html->tag('h1','Pedidos');
             ?>
           <div class="menu">
               <?php
-              echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'));
-              echo $this->Html->link('Create', array('controller' => 'pedidos', 'action' => '/add'), array('id' => 'menuSubtitle'));
-              ?>
-          </div>
+              echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'), array('id' => 'menu'));
+              echo $this->Html->link('Create', array('controller' => 'pedidos', 'action' => '/add'), array('id' => 'menu'));
+              ?>        
+          </div>    
         </div>
         <table>
             <thead>

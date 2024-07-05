@@ -20,8 +20,8 @@
             ?>
           <div class="menu">
               <?php
-              echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'));
-              echo $this->Html->link('Create', array('controller' => 'creates', 'action' => '/'));
+              echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'), array('id' => 'menu'));
+              echo $this->Html->link('Create', array('controller' => 'pedidos', 'action' => '/add'), array('id' => 'menu'));
               ?>        
           </div>
         </div>
@@ -39,19 +39,19 @@
                 <?php foreach ($detalhes as $detalhe) : ?>
                     <tr>
                         <td>
-                            <?php echo $detalhe['pedido_id']; ?>
+                            <?php echo $detalhe['pedido']['pedido_id'] ; ?>
                         </td>
                         <td>
-                            <?php echo ($detalhe['cliente_nome']); ?>
+                            <?php echo $detalhe['clientes']['cliente_nome'] ; ?>
                         </td>
                         <td>
-                            <?php echo ($detalhe['produto_nome']); ?>
+                            <?php echo $detalhe['produtos']['produto_nome'] ; ?>
                         </td>
                         <td>
-                            <?php echo ($detalhe['observacao']); ?>
+                            <?php echo $detalhe['pedido']['observacao'] ; ?>
                         </td>
                         <td>
-                            <?php echo ($detalhe['created']); ?>
+                            <?php echo $detalhe['pedido']['created']; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>

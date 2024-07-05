@@ -26,38 +26,53 @@ body {
   justify-content: space-between;
 }
 .headerCard {
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  gap: 700px;
 }
-.inputsForm {
+.form {
   display: flex;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   gap: 80px;
+  margin-top: 80px;
 }
-.firstInputs {
+form {
   display: flex;
   flex-direction: row;
+  gap: 150px;
+  align-items: center;
+}
+.inputs {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
 }
 .menu {
   justify-content: space-between;
   text-decoration: none;
 }
-/* .menuSubtitle {
-} */
+#menu {
+  background-color: #e9e9e9;
+  color: rgb(0, 0, 0);
+  padding: 20px;
+  width: 100px;
+  text-align: center;
+  border-radius: 20px;
+  border: 0px;
+  font-size: 20px;
+  text-decoration: solid;
+}
 .cardTitle {
   text-align: center;
 }
 .textCard {
   color: rgb(105, 101, 101);
-}
-
-.field-wrapper {
-  display: flex;
-  flex-direction: column;
 }
 #cliente,
 #produto,
@@ -66,7 +81,11 @@ body {
   border-radius: 10px;
   background-color: #fefafa;
   border-width: 2px;
-  border-color:#2a59a0;
+  border-color: #2a59a0;
+}
+label {
+  font-size: 18px;
+  gap: 20px;
 }
 /* #nameTitle {
   } */
@@ -76,10 +95,10 @@ table {
 }
 th {
   background-color: #f2f2f2;
+  border-radius: 2px;
 }
 th,
 td {
-  /* border: 1px solid black; */
   padding: 35px;
   text-align: left;
 }
@@ -88,8 +107,11 @@ td {
   background-color: #2a59a0;
   color: white;
   padding: 20px;
+  width: 100px;
+  text-align: center;
   border-radius: 150px;
   border: 0px;
   font-size: medium;
   text-decoration: none;
+  font-size: 18px;
 }

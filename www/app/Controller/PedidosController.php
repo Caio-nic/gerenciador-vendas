@@ -13,50 +13,46 @@ class PedidosController extends AppController {
                 FROM 
                     pedidos
                 INNER JOIN 
-                    clientes ON pedidos.cliente_id = clientes.id
-            ";
+                    clientes ON pedidos.cliente_id = clientes.id";
             $pedidos = $this->Pedidos->query($query);
             $this->set('pedidos', $pedidos);
 
-            debug($pedidos);    
+            // debug($pedidos);    
         }   
         
     public function view($id=null) {
-        $this->loadModel('Pedido');      
         $query = "
-            (SELECT
-                pedidos.id AS pedido_id,
-                pedidos.created,
-                pedidos.observacao,
+            SELECT
+                pedido.id AS pedido_id,
+                pedido.created,
+                pedido.observacao,
                 clientes.nome AS cliente_nome,
-                NULL AS produto_nome
+                pedido.id AS pedido_id,
+                produtos.nome AS produto_nome
             FROM
-                pedidos
+                pedidos as pedido
             INNER JOIN
-                clientes ON pedidos.cliente_id = clientes.id)
-            UNION ALL
-            (SELECT
-                pedidos.id AS pedido_id,
-                produtos.nome AS produto_nome,
-                NULL AS created,
-                NULL AS observacao,
-                NULL AS cliente_nome
-            FROM
-                pedidos
+                clientes ON pedido.cliente_id = clientes.id
             INNER JOIN
-                produtos_pedidos ON pedidos.id = produtos_pedidos.pedido_id
+                produtos_pedidos ON pedido.id = produtos_pedidos.pedido_id
             INNER JOIN
-                produtos ON produtos_pedidos.produto_id = produtos.id) 
+                produtos ON produtos_pedidos.produto_id = produtos.id
                 ";
+                // WHERE 
+                //     pedido.id = {$id}
+            //nao entendi pq não esta funcionando o id
+            // if ($id !== null) {
+            //      $query .= "WHERE pede.id = {$id}";
+            // }
 
-            if ($id !== null) {
-                 $query .= "WHERE pedidos.id = {$id}";
-            }
-
-            $detalhes = $this->Pedido->query($query);
+            $detalhes = $this->Pedido->query($query, array (
+                'conditions' => array('Pedido.id' => $id)
+            )
+        
+        );
             $this->set('detalhes', $detalhes);
 
-            debug($detalhes);
+            // debug($detalhes);
         }
         public function add(){
             $this->set("clientes", $this->Pedido->query("select nome from clientes"));
