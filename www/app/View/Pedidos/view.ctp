@@ -38,28 +38,23 @@
             <tbody>
                 <?php foreach ($detalhes as $detalhe) : ?>
                     <tr>
-                    <td>
-                        <?php echo $detalhe['pedidos']['id']; ?>
-                    </td>
-                    <td>
-                        <?php echo $detalhe['clientes']['nome']; ?>
-                    </td>
-                    <td>
-                        <?php echo $detalhe['produtos']['nome']; ?>
-                    </td>
-                    <td>
-                        <?php echo $detalhe['pedidos']['created']; ?>
-                    </td>
-                    <td>
-                        <?php echo $detalhe['pedidos']['observacao']; ?>
-                    </td>
+                        <td>
+                            <?php echo $detalhe['pedido_id']; ?>
+                        </td>
+                        <td>
+                            <?php echo ($detalhe['cliente_nome']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($detalhe['produto_nome']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($detalhe['observacao']); ?>
+                        </td>
+                        <td>
+                            <?php echo ($detalhe['created']); ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
-                    <?php echo ($detalhe['pedidos']['id']); ?>
-                    <?php echo ($detalhe['clientes']['nome']); ?>
-                    <?php echo ($detalhe['produtos']['nome']); ?> 
-                    <?php echo ($detalhe['pedidos']['created']); ?> 
-                    <?php echo ($detalhe['pedidos']['observacao']); ?> 
             </tbody>
         </table>
     </div>

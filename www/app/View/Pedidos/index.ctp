@@ -21,7 +21,7 @@
           <div class="menu">
               <?php
               echo $this->Html->link('Pedidos', array('controller' => '', 'action' => '/'));
-              echo $this->Html->link('Create', array('controller' => 'creates', 'action' => '/'), array('id' => 'menuSubtitle'));
+              echo $this->Html->link('Create', array('controller' => 'pedidos', 'action' => '/add'), array('id' => 'menuSubtitle'));
               ?>
           </div>
         </div>

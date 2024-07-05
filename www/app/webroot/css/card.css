@@ -32,6 +32,16 @@ body {
   justify-content: space-between;
   gap: 700px;
 }
+.inputsForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+}
+.firstInputs {
+  display: flex;
+  flex-direction: row;
+}
 .menu {
   justify-content: space-between;
   text-decoration: none;
@@ -48,6 +58,15 @@ body {
 .field-wrapper {
   display: flex;
   flex-direction: column;
+}
+#cliente,
+#produto,
+#obs {
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: #fefafa;
+  border-width: 2px;
+  border-color:#2a59a0;
 }
 /* #nameTitle {
   } */

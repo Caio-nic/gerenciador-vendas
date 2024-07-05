@@ -16,50 +16,51 @@ class PedidosController extends AppController {
                     clientes ON pedidos.cliente_id = clientes.id
             ";
             $pedidos = $this->Pedidos->query($query);
-
-            // Passar os resultados para a view
             $this->set('pedidos', $pedidos);
 
-            debug($pedidos);
+            debug($pedidos);    
         }   
-        // Detalhes do pedido ( exibe os produtos selecionados, OK
-        // e um resumo de quem pediu, ok
-        //quando pediu, 
-        // qual o id, OK se for id do pedido
-        //e as observações )
-    public function view() {
-        $this->loadModel('Pedidos');      
+        
+    public function view($id=null) {
+        $this->loadModel('Pedido');      
         $query = "
-            SELECT
-                produtos_pedidos.pedido_id,
-                produtos_pedidos.produto_id,
-                produtos.id,
-                produtos.nome
-            FROM
-                produtos_pedidos
-            INNER JOIN
-                produtos ON produtos_pedidos.produto_id = produtos.id
-                ";
-        $query = "
-            SELECT
-                pedidos.cliente_id,
-                clientes.id,
-                clientes.nome,
+            (SELECT
+                pedidos.id AS pedido_id,
                 pedidos.created,
-                pedidos.observacao
+                pedidos.observacao,
+                clientes.nome AS cliente_nome,
+                NULL AS produto_nome
             FROM
                 pedidos
             INNER JOIN
-                clientes ON pedidos.cliente_id = clientes.id
+                clientes ON pedidos.cliente_id = clientes.id)
+            UNION ALL
+            (SELECT
+                pedidos.id AS pedido_id,
+                produtos.nome AS produto_nome,
+                NULL AS created,
+                NULL AS observacao,
+                NULL AS cliente_nome
+            FROM
+                pedidos
+            INNER JOIN
+                produtos_pedidos ON pedidos.id = produtos_pedidos.pedido_id
+            INNER JOIN
+                produtos ON produtos_pedidos.produto_id = produtos.id) 
                 ";
 
-                $detalhes = $this->Pedidos->query($query);
-                // clientes.id
-                // clientes.nome
-            
-            // Passar os resultados para a view
+            if ($id !== null) {
+                 $query .= "WHERE pedidos.id = {$id}";
+            }
+
+            $detalhes = $this->Pedido->query($query);
             $this->set('detalhes', $detalhes);
+
             debug($detalhes);
+        }
+        public function add(){
+            $this->set("clientes", $this->Pedido->query("select nome from clientes"));
+            $this->set("produtos", $this->Pedido->query("select nome from produtos"));
         }
     }
 
