@@ -55,8 +55,21 @@ class PedidosController extends AppController {
             // debug($detalhes);
         }
         public function add(){
-            $this->set("clientes", $this->Pedido->query("select nome from clientes"));
-            $this->set("produtos", $this->Pedido->query("select nome from produtos"));
+            // $this->set("clientes", $this->Pedido->query("select nome from clientes"));
+            // $this->set("produtos", $this->Pedido->query("select nome from produtos"));
+        
+
+            // $dadosPedido = $this->request->data['Pedido'];
+            // $queryInserir = "
+            // INSERT INTO 
+            //     pedidos (cliente_id, produto_id) 
+            // VALUES ";
+            
+            if ($this->request->is('post')){
+                 $pedidos = $this->request->data['Pedidos']['observacao'];
+                
+                //  $this->inserIntoDatabase($observacao);
+            }
         }
     }
 

@@ -41,6 +41,8 @@ echo $this->Html->css('card');
             </div>
             <?php
                 echo $this->Html->link('Criar', array('controller' => 'pedidos', 'action' => '/view' ), array('id' => 'button'));
+                // echo $this->Form->end('Salvar'); 
+
             ?>
     </div>
 </div>
