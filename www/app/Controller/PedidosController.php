@@ -48,28 +48,33 @@ class PedidosController extends AppController {
             $detalhes = $this->Pedido->query($query, array (
                 'conditions' => array('Pedido.id' => $id)
             )
-        
         );
             $this->set('detalhes', $detalhes);
-
             // debug($detalhes);
         }
 
         public function add() {
+            //esses selects são para mostrar os dados nos inputs
+            $this->set("clientes", $this->Pedido->query("
+            select 
+                nome 
+            from 
+                clientes"));
+            $this->set("produtos", $this->Pedido->query("
+            select 
+                nome 
+            from 
+                produtos"));
 
-            //ve se a req eh um post
             if ($this->request->is('post')) {
-
                 // puxa os dados do formulário
                 $data = $this->request->data;
                 $clienteSelecionado = $data['Pedido']['cliente_id'];
-                $produtosSelecionados = $data['Pedido']['produtos'];
+                $produtosSelecionados = $data['Pedido']['ProdutosPedido'];
                 $observacoes = $data['Pedido']['observacao'];
-
-                // faz o pedido   
-                $pedidoId = $this->inserirPedido($clienteSelecionado, $observacoes);
-   
-                // se deu certo o pedido insere os produtos 
+              
+                // faz o pedido com esses dados
+                $pedidoId = $this->inserirPedido($clienteSelecionado, $observacoes); 
                 if ($pedidoId) {
                     foreach ($produtosSelecionados as $produtoId) {
                         $this->inserirProdutoPedido($pedidoId, $produtoId);
@@ -77,7 +82,7 @@ class PedidosController extends AppController {
                 }            
                 return $this->redirect(['action' => 'add']);
             }
-            // Carregar dados para dropdowns
+            // carrega dados para o dropdowns
                 $this->loadModel('Cliente');
                 $clientes = $this->Cliente->find('list', ['fields' => ['id', 'nome']]);
                 $this->set(compact('clientes'));
@@ -88,39 +93,35 @@ class PedidosController extends AppController {
             }
 
         // Método privado para inserir um pedido
-            private function inserirPedido($clienteId, $observacao) {
-        $this->loadModel('Pedido');
-
-        $data = [
-            'cliente_id' => $clienteId,
-            'observacao' => $observacao,
-            'created' => date('Y-m-d H:i:s'),
-            'modified' => date('Y-m-d H:i:s')
-        ];
-
-        $this->Pedido->create();
-        if ($this->Pedido->save($data)) {
-            return $this->Pedido->id;
+        private function inserirPedido($clienteId, $observacao) {
+            $this->loadModel('Pedido');
+            $data = [
+                'cliente_id' => $clienteId,
+                'observacao' => $observacao,
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s')
+                ];
+                
+            $query = "INSERT INTO pedidos (cliente_id, observacao, created, modified) VALUES ";
+            $query .= "(" . $clienteId . ", '" . $observacao . "', '" . $data['created'] . "', '" . $data['modified'] . "')";
+          
+            $this->Pedido->query($query);
         }
 
-        return false;
-    }
-
-    private function inserirProdutoPedido($pedidoId, $produtoId) {
-        $this->loadModel('ProdutosPedido');
-
-        $data = [
-            'pedido_id' => $pedidoId,
-            'produto_id' => $produtoId,
-            'vl_unitario' => 0,   // Valor unitário (ajuste conforme necessário)
-            'qt_produto' => 1,    // Quantidade do produto (ajuste conforme necessário)
-            'unidade' => '',      // Unidade do produto (ajuste conforme necessário)
-            'observacao' => '',   // Observação (ajuste conforme necessário)
-            'created' => date('Y-m-d H:i:s'),
-            'modified' => date('Y-m-d H:i:s')
-        ];
-
-        $this->ProdutosPedido->create();
-        $this->ProdutosPedido->save($data);
-    }
+        private function inserirProdutoPedido($pedidoId, $produtoId) {
+            $this->loadModel('ProdutosPedido');
+            $data = [
+                'pedido_id' => $pedidoId,
+                'produto_id' => $produtoId,
+                'observacao' => "",
+                'created' => date('Y-m-d H:i:s'),
+                'modified' => date('Y-m-d H:i:s')
+                // 'vl_unitario' => 0,
+                // 'qt_produto' => 1,
+                // 'unidade' => '', 
+                ];
+            $query = " INSERT INTO produtos_pedidos (pedido_id, produto_id, observacao) VALUES ";
+            $query .= "(" . $pedidoId . ", '" . $produtoId . "', '" . "" . "')";
+                   
+        }
 }

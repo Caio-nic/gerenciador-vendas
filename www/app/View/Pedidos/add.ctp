@@ -18,36 +18,33 @@ echo $this->Html->css('card');
         <div class='form'>
             <div class='inputs'>
                 <?php
-                    echo $this->Form->create('Pedido'); 
-                 echo $this->Form->input('Selecione o cliente', 
+                    echo $this->Form->create('Pedido', ['url' => ['controller' => 'pedidos', 'action' => 'add']]);
+                    echo $this->Form->input('cliente_id', 
                      [
                          'id' => 'cliente',
-                        'options' => $clientes,
+                         'options' => $clientes,
                          'label' => 'Selecione o cliente'
-
                     ]); 
-                 echo $this->Form->input('Produtos',
-                  [
-                    'type' => 'select',
-                    'options' => $produtos, 
-                    'multiple' => 'checkbox',
-                    'label' => 'Selecione o(s) produtos',
-                    'hiddenField' => false,
-                    'class' => 'produto',
+                    echo $this->Form->input('ProdutosPedido',
+                    [
+                        'class' => 'produto',
+                        'type' => 'select',
+                        'label' => 'Selecione o(s) produtos',
+                        'multiple' => 'checkbox',
+                        'options' => $produtos, 
+                        'hiddenField' => false
                     ]); 
 
-                    echo $this->Form->input('observacao ', 
+                    echo $this->Form->input('observacao', 
                     array(
                         'id'=>'obs',
                         'placeholder' => 'Observação', 
-                        'label' => false, 
-                        'rows'=>'2'
+                        'rows'=>'2',
+                        'label' => false 
                     ));
+                    echo $this->Form->button('Criar',array('id' => 'button'));
+                    echo $this->Form->end();
                 ?>
             </div>
-            <?php
-                echo $this->Html->link('Criar', array('controller' => 'pedidos', 'action' => '/view' ), array('id' => 'button'));
-
-            ?>
     </div>
 </div>
