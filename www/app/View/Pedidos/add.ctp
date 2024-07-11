@@ -18,30 +18,35 @@ echo $this->Html->css('card');
         <div class='form'>
             <div class='inputs'>
                 <?php
-                    echo $this->Form->create('Post');
-                    echo $this->Form->select(
-                        'Cliente', 
-                        Hash::combine($clientes, '{n}.clientes.nome', '{n}.clientes.nome', ),
-                        [
-                            'empty' => 'Selecione o cliente', 
-                            'label' => 'Selecione o cliente',
-                            'id' => 'cliente'
-                        ]
-                );
-                    echo $this->Form->input('Produtos', [
-                        'type' => 'select',
-                        'multiple' => 'checkbox',
-                        'options' => Hash::combine($produtos, '{n}.produtos.nome', '{n}.produtos.nome'),
-                        'label' => 'Selecione o(s) produtos',
-                        'hiddenField' => false,
-                        'class' => 'produto',
-                ]);
-                    echo $this->Form->input('Observações', array('id'=>'obs','placeholder' => 'Observações', 'label' => false, 'rows'=>'2'));
+                    echo $this->Form->create('Pedido'); 
+                 echo $this->Form->input('Selecione o cliente', 
+                     [
+                         'id' => 'cliente',
+                        'options' => $clientes,
+                         'label' => 'Selecione o cliente'
+
+                    ]); 
+                 echo $this->Form->input('Produtos',
+                  [
+                    'type' => 'select',
+                    'options' => $produtos, 
+                    'multiple' => 'checkbox',
+                    'label' => 'Selecione o(s) produtos',
+                    'hiddenField' => false,
+                    'class' => 'produto',
+                    ]); 
+
+                    echo $this->Form->input('observacao ', 
+                    array(
+                        'id'=>'obs',
+                        'placeholder' => 'Observação', 
+                        'label' => false, 
+                        'rows'=>'2'
+                    ));
                 ?>
             </div>
             <?php
                 echo $this->Html->link('Criar', array('controller' => 'pedidos', 'action' => '/view' ), array('id' => 'button'));
-                // echo $this->Form->end('Salvar'); 
 
             ?>
     </div>
