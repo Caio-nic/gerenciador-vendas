@@ -12,11 +12,10 @@ class PedidosController extends AppController {
                     clientes.nome
                 FROM 
                     pedidos
-                INNER JOIN 
+                LEFT JOIN 
                     clientes ON pedidos.cliente_id = clientes.id";
             $pedidos = $this->Pedidos->query($query);
             $this->set('pedidos', $pedidos);
-
             // debug($pedidos);    
         }   
         
@@ -31,24 +30,22 @@ class PedidosController extends AppController {
                 produtos.nome AS produto_nome
             FROM
                 pedidos as pedido
-            INNER JOIN
+            LEFT JOIN
                 clientes ON pedido.cliente_id = clientes.id
-            INNER JOIN
+            LEFT JOIN
                 produtos_pedidos ON pedido.id = produtos_pedidos.pedido_id
-            INNER JOIN
+            LEFT JOIN
                 produtos ON produtos_pedidos.produto_id = produtos.id
+            WHERE 
+                pedido.id = {$id}
                 ";
-                // WHERE 
-                //     pedido.id = {$id}
             //nao entendi pq não esta funcionando o id
             // if ($id !== null) {
             //      $query .= "WHERE pede.id = {$id}";
             // }
 
-            $detalhes = $this->Pedido->query($query, array (
-                'conditions' => array('Pedido.id' => $id)
-            )
-        );
+            $detalhes = $this->Pedido->query($query);
+            
             $this->set('detalhes', $detalhes);
             // debug($detalhes);
         }
@@ -105,7 +102,7 @@ class PedidosController extends AppController {
             $query = "INSERT INTO pedidos (cliente_id, observacao, created, modified) VALUES ";
             $query .= "(" . $clienteId . ", '" . $observacao . "', '" . $data['created'] . "', '" . $data['modified'] . "')";
           
-            $this->Pedido->query($query);
+            return $this->Pedido->query($query);
         }
 
         private function inserirProdutoPedido($pedidoId, $produtoId) {
@@ -116,12 +113,10 @@ class PedidosController extends AppController {
                 'observacao' => "",
                 'created' => date('Y-m-d H:i:s'),
                 'modified' => date('Y-m-d H:i:s')
-                // 'vl_unitario' => 0,
-                // 'qt_produto' => 1,
-                // 'unidade' => '', 
                 ];
             $query = " INSERT INTO produtos_pedidos (pedido_id, produto_id, observacao) VALUES ";
-            $query .= "(" . $pedidoId . ", '" . $produtoId . "', '" . "" . "')";
-                   
+            $query .= "(" . $pedidoId . ", '" . $produtoId . "', '" . "" . "', '" . $data['created'] . "', '" . $data['modified'] . "')";
+            
+            return $this->Pedido->query($query);                   
         }
 }

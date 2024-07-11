@@ -47,7 +47,7 @@
                             </td>
                             <td>
                                 <?php
-                                echo $this->Html->link('Detalhes', array('controller' => 'pedidos', 'action' => '/view' ), array('id' => 'button'));
+                                echo $this->Html->link('Detalhes', array('controller' => 'pedidos', 'action' => '/view', $pedido['pedidos']['id'] ), array('id' => 'button'));
                                 ?>
                             </td>
                         </tr>

@@ -34,7 +34,6 @@ echo $this->Html->css('card');
                         'options' => $produtos, 
                         'hiddenField' => false
                     ]); 
-
                     echo $this->Form->input('observacao', 
                     array(
                         'id'=>'obs',
